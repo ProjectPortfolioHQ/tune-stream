@@ -1,5 +1,6 @@
 import prisma from "./client";
 const bcrypt = require("bcrypt");
+import { faker } from '@faker-js/faker';
 
 const saltRounds = 10;
 const password = "Admin@123";
@@ -31,6 +32,24 @@ async function main() {
       },
     });
   });
+
+  seedUsers();
+}
+
+async function seedUsers() {
+  const nbOfUsers = 1_000;
+  const userPassword = "User@123";
+  for (let i = 0; i < nbOfUsers; i++) {
+    const email: string = faker.internet.email();
+    await prisma.user.upsert({
+      where: { email: email },
+      update: {},
+      create: {
+        email: email,
+        password: await bcrypt.hash(userPassword, saltRounds)
+      }
+    })
+  }
 }
 
 main()

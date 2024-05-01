@@ -11,29 +11,31 @@ interface Link {
   icon: ReactNode;
 }
 
+const dashboardPath = "/admin/dashboard";
+
 const links: Link[] = [
   {
     key: 1,
     icon: <GoPeople />,
-    href: "/admin/users",
+    href: `${dashboardPath}/users`,
     name: "Users",
   },
   {
     key: 2,
     icon: <IoAlbumsOutline />,
-    href: "/admin/albums",
+    href: `${dashboardPath}/albums`,
     name: "Albums",
   },
   {
     key: 3,
     icon: <CiMusicNote1 />,
-    href: "/admin/songs",
+    href: `${dashboardPath}/songs`,
     name: "Songs",
   },
   {
     key: 4,
     icon: <GoPeople />,
-    href: "/admin/staffs",
+    href: `${dashboardPath}/staffs`,
     name: "Staffs",
   },
 ];

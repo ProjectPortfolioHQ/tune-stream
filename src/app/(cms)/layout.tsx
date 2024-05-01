@@ -1,6 +1,8 @@
 import { cn } from "@/lib/utils";
 import { Inter as FontSans } from "next/font/google";
 import "./cmsGlobal.css";
+import '@radix-ui/themes/styles.css';
+import { Theme } from '@radix-ui/themes';
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -25,7 +27,9 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
-        {children}
+        <Theme appearance="dark">
+          {children}
+        </Theme>
       </body>
     </html>
   );

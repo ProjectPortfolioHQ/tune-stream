@@ -32,6 +32,14 @@ model InternalUser {
   @@index([email])
 }
 
+model User {
+  id       Int    @id @default(autoincrement())
+  email    String @unique
+  password String
+
+  @@index([email])
+}
+
 enum Status {
   ACTIVE
   IN_ACTIVE
