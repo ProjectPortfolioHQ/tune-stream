@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Table, Button } from "@radix-ui/themes";
+import Skeleton from 'react-loading-skeleton'
 
 export default function CrudUserPage() {
   const [users, setUsers] = useState<User[]>([])
@@ -20,7 +21,38 @@ export default function CrudUserPage() {
     })()
   }, [])
 
-  if (isLoading) return <p>Loading...</p>
+  if (isLoading) {
+    return <>
+      <div className="mb-8 flex justify-end">
+        <Button>Create</Button>
+      </div>
+      <Table.Root variant="surface">
+        <Table.Header>
+          <Table.Row>
+            <Table.ColumnHeaderCell width={"100px"}>Id</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
+            <Table.ColumnHeaderCell justify={"center"} width={"200px"}>Actions</Table.ColumnHeaderCell>
+          </Table.Row>
+        </Table.Header>
+
+        <Table.Body>
+          {Array(10).fill(1).map((_, i) =>
+            <Table.Row key={i}>
+              <Table.RowHeaderCell><Skeleton /></Table.RowHeaderCell>
+              <Table.Cell><Skeleton /></Table.Cell>
+              <Table.Cell justify={"center"} width={"200px"}>
+                <Button mr={"2"}>Edit</Button>
+                <Button>Delete</Button>
+              </Table.Cell>
+            </Table.Row>
+          )}
+        </Table.Body>
+      </Table.Root>
+      <div>
+
+      </div>
+    </>
+  }
 
   return <div>
     <div className="mb-8 flex justify-end">
@@ -29,7 +61,7 @@ export default function CrudUserPage() {
     <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell>Id</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell width={"100px"}>Id</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell justify={"center"} width={"200px"}>Actions</Table.ColumnHeaderCell>
         </Table.Row>
