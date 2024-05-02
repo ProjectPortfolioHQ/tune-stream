@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { Table } from "@radix-ui/themes";
+import { Table, Button } from "@radix-ui/themes";
 
 export default function CrudUserPage() {
   const [users, setUsers] = useState<User[]>([])
@@ -23,11 +23,15 @@ export default function CrudUserPage() {
   if (isLoading) return <p>Loading...</p>
 
   return <div>
+    <div className="mb-8 flex justify-end">
+      <Button>Create</Button>
+    </div>
     <Table.Root variant="surface">
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeaderCell>Id</Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell>Email</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell justify={"center"} width={"200px"}>Actions</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 
@@ -36,6 +40,10 @@ export default function CrudUserPage() {
           <Table.Row key={user.id}>
             <Table.RowHeaderCell>{user.id}</Table.RowHeaderCell>
             <Table.Cell>{user.email}</Table.Cell>
+            <Table.Cell justify={"center"} width={"200px"}>
+              <Button mr={"2"}>Edit</Button>
+              <Button>Delete</Button>
+            </Table.Cell>
           </Table.Row>
         )}
       </Table.Body>
